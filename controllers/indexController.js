@@ -4,10 +4,9 @@ const path = require("node:path");
 const publicPath = path.join(__dirname, "..", "public");
 
 async function getUsernames(req, res) {
-  const usernames = await db.getAllUsernames();
-  res.send(
-    "Usernames: " + usernames.map((user) => `<p>${user.username}</p>`).join(""),
-  );
+  const rows = await db.getAllUsernames();
+  const usernames = rows.map((user) => user.username);
+  res.render("index", { usernames });
 }
 
 async function createUsernameGet(req, res) {
