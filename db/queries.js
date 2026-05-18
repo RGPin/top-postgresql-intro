@@ -17,8 +17,20 @@ async function searchUsername(param) {
   return rows;
 }
 
+async function deleteUsername(username) {
+  await pool.query("DELETE FROM usernames WHERE username = ($1)", [username]);
+}
+
+async function deleteAllUsernames() {
+  // restart id
+  // await pool.query("TRUNCATE TABLE usernames RESTART IDENTITY");
+  await pool.query("TRUNCATE TABLE usernames");
+}
+
 module.exports = {
   getAllUsernames,
   insertUsername,
   searchUsername,
+  deleteUsername,
+  deleteAllUsernames,
 };

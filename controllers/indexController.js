@@ -25,9 +25,21 @@ async function searchUsername(req, res) {
   res.render("index", { usernames, isSearch: true });
 }
 
+async function deleteUsername(req, res) {
+  await db.deleteUsername(req.params.username);
+  res.redirect("/");
+}
+
+async function deleteAllUsernames(req, res) {
+  await db.deleteAllUsernames();
+  res.redirect("/");
+}
+
 module.exports = {
   getUsernames,
   createUsernameGet,
   createUsernamePost,
   searchUsername,
+  deleteUsername,
+  deleteAllUsernames,
 };

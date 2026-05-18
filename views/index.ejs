@@ -11,16 +11,24 @@
         <input type="text" name="searchUser" id="searchUser" />
       </label>
     </form>
+    <% if (isSearch) { %>
+      <a href="/">Clear search results</a>
+    <% } %>
     <% if (locals.usernames) { %>
       <ul>
         <% usernames.forEach((username) => { %>
-          <li><%= username %></li>
+          <li>
+            <%= username %>
+            <form method="POST" action="/delete/<%= username %>" style="display: inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
         <% }) %>
       </ul>
     <%  } %>
     <a href="/new">Add user</a>
-    <% if (isSearch) { %>
-      <a href="/">Clear</a>
-    <% } %>
+    <form method="POST" action="/deleteall" style="display: inline;">
+      <button type="submit">Delete all</button>
+    </form>
   </body>
 </html>
